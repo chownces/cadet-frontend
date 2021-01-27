@@ -1,4 +1,5 @@
 import { Dialog } from '@blueprintjs/core';
+import { IconNames } from '@blueprintjs/icons';
 import React from 'react';
 import ReactAce from 'react-ace/lib/ace';
 import { useMediaQuery } from 'react-responsive';
@@ -7,6 +8,7 @@ import { Prompt } from 'react-router';
 import Editor, { EditorProps } from '../editor/Editor';
 import McqChooser, { McqChooserProps } from '../mcqChooser/McqChooser';
 import Repl, { ReplProps } from '../repl/Repl';
+import { SideContentTab, SideContentType } from '../sideContent/SideContentTypes';
 import MobileSideContent, { MobileSideContentProps } from './mobileSideContent/MobileSideContent';
 
 export type MobileWorkspaceProps = StateProps;
@@ -74,13 +76,33 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
     }
   };
 
-  const createReplOutput = () => {
-    return <Repl {...props.replProps} />;
-  };
+  const mobileEditorTab: SideContentTab = React.useMemo(
+    () => ({
+      label: 'Editor',
+      iconName: IconNames.EDIT,
+      body: createWorkspaceInput(),
+      id: SideContentType.mobileEditor,
+      toSpawn: () => true
+    }),
+    [props.customEditor, props.editorProps, props.mcqProps]
+  );
 
-  const createEditorProps = {
-    createWorkspaceInput: createWorkspaceInput,
-    createReplOutput: createReplOutput
+  const mobileRunTab: SideContentTab = React.useMemo(
+    () => ({
+      label: 'Run',
+      iconName: IconNames.PLAY,
+      body: <Repl {...props.replProps} />,
+      id: SideContentType.mobileEditorRun,
+      toSpawn: () => true
+    }),
+    [props.replProps]
+  );
+
+  const updatedMobileSideContentProps = () => {
+    return {
+      ...props.mobileSideContentProps,
+      mobileTabs: [mobileEditorTab, ...props.mobileSideContentProps.mobileTabs, mobileRunTab]
+    };
   };
 
   return (
@@ -101,7 +123,7 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
 
       {/* TODO: Update CSS for mobile workspace-parent remove flex: row, overflow:hidden, etc. */}
 
-      <MobileSideContent {...props.mobileSideContentProps} {...createEditorProps} />
+      <MobileSideContent {...updatedMobileSideContentProps()} />
     </div>
   );
 };
