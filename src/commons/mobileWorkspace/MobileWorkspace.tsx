@@ -27,53 +27,38 @@ type StateProps = {
 const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
   const isIOS = /iPhone|iPod/.test(navigator.platform);
 
-  /**
-   * Boolean to track if Android browser viewheight has been handled.
-   * (Reason: Android soft keyboard results in change in mobile browser viewheight, causing UI distortions)
-   */
-  const handledAndroidViewheight = React.useRef(false);
+  // TODO: This is not detecting orientation change when phone text is set to LARGE (Oneplus 6T)
+  // Thus callback is not called too
+  // Reason: We changed the meta viewport, which somehow affected react-responsive's calculation of orientation change
+  // (lines 56-60)
+  const isPortrait = useMediaQuery({ orientation: 'portrait' });
 
   /**
-   * Callback for isPortrait useMediaQuery()
+   * Handle Android users' viewport height to prevent UI distortions when soft keyboard is up
    */
-  const orientationChangeCallback = (isPortrait: boolean) => {
-    // Triggers when Android user loaded page in landscape mode and viewheight has not been handled
-    if (isPortrait && !isIOS && !handledAndroidViewheight.current) {
-      document.documentElement.style.setProperty('overflow', 'auto');
-      const metaViewport = document.querySelector('meta[name=viewport]');
-      metaViewport!.setAttribute(
-        'content',
-        'height=' + window.innerHeight + 'px, width=device-width'
-      );
-
-      handledAndroidViewheight.current = true;
-    }
-
-    // Whenever orientation changes to landscape, force the soft keyboard down
+  React.useEffect(() => {
+    // Whenever orientation changes to landscape, force the soft keyboard down first
     if (!isPortrait) {
       editorRef.current!.editor.blur();
     }
-  };
 
-  const isPortrait = useMediaQuery(
-    { orientation: 'portrait' },
-    undefined,
-    orientationChangeCallback
-  );
-
-  /**
-   * If Android user loads page in portrait, handle the web browser viewheight
-   */
-  React.useEffect(() => {
     if (isPortrait && !isIOS) {
+      // TODO: The following lines causes bugs in react-responsive (unable to detect
+      // orientation change in some browser dimensions)
       document.documentElement.style.setProperty('overflow', 'auto');
       const metaViewport = document.querySelector('meta[name=viewport]');
       metaViewport!.setAttribute(
         'content',
         'height=' + window.innerHeight + 'px, width=device-width'
       );
-
-      handledAndroidViewheight.current = true;
+    } else if (!isPortrait && !isIOS) {
+      // Reset the above CSS when browser is in landscape
+      document.documentElement.style.setProperty('overflow', 'hidden');
+      const metaViewport = document.querySelector('meta[name=viewport]');
+      metaViewport!.setAttribute(
+        'content',
+        'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+      );
     }
   }, [isPortrait, isIOS]);
 
