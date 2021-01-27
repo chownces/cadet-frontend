@@ -1,13 +1,15 @@
 import { Classes, Icon, Tab, TabId, Tabs, Tooltip } from '@blueprintjs/core';
 import { IconName, IconNames } from '@blueprintjs/icons';
 import React from 'react';
+import { DraggableEvent } from 'react-draggable';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
 import { OverallState } from '../../application/ApplicationTypes';
 import { SideContentTab, SideContentType } from '../../sideContent/SideContentTypes';
 import { DebuggerContext, WorkspaceLocation } from '../../workspace/WorkspaceTypes';
 import { getDynamicTabs } from './../../sideContent/SideContentHelper';
-
+import DraggableRepl from './DraggableRepl'
 export type MobileSideContentProps = DispatchProps & StateProps;
 
 type DispatchProps = {
@@ -36,7 +38,7 @@ type StateProps = {
 type OwnProps = {
   createWorkspaceInput: () => JSX.Element;
   createReplOutput: () => JSX.Element;
-};
+};  
 
 // TODO: Handle resizing bug - TypeError: Cannot read property 'clientHeight' of undefined
 // Workspace.tsx line 45
@@ -53,6 +55,36 @@ type OwnProps = {
 
 // TODO: Currently passing createWorkspaceInput and createReplOutput prop weirdly through 'OwnProps'
 
+// styled-components
+const EditorPanel = styled.div`
+  width: 100vw;
+  height: 100%;
+  z-index: 1;
+`;
+
+const SelectedPanel = styled.div`
+  height: 100%;
+  padding: 10px; 
+  backgroundColor: #2c3e50;
+`;
+
+const UnSelectedPanel = styled.div`
+  display: none;
+`;
+
+const TabsContainer = styled.div`
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  background-color: #182026;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.3), 0 -10px 20px rgba(0, 0, 0, 0.2);
+`;
+
 const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => {
   const {
     mobileTabs,
@@ -64,7 +96,20 @@ const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => 
 
   // TODO: Explore idea of shifting dynamicTabs and debuggerContext up to a common parent component
   const [dynamicTabs, setDynamicTabs] = React.useState(mobileTabs);
+  const [dragPosition, setDragPosition] = React.useState({x:0, y:0});
 
+  const handleShowRepl = () => {
+    setDragPosition({x: 0, y: -300});
+  };
+
+  const handleHideRepl = () => {
+    setDragPosition({x: 0, y: 0});
+  };
+
+  const onDrag = (e: DraggableEvent, position: {x:number,y:number}): void => {
+    setDragPosition(position);
+  };
+  
   React.useEffect(() => {
     // Set initial sideContentActiveTab for this workspace
     handleActiveTabChange(defaultSelectedTabId ? defaultSelectedTabId : mobileTabs[0].id!);
@@ -103,36 +148,37 @@ const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => 
           }
         : tab.body;
 
-      // TODO: Style the wrapping div
       return tab.id === selectedTabId ? (
-        <div style={{ height: '100%', padding: '10px', backgroundColor: '#2c3e50' }}>{tabBody}</div>
+        <SelectedPanel key={tab.id}>{tabBody}</SelectedPanel>
       ) : (
-        <div style={{ display: 'none' }}>{tabBody}</div>
+        <UnSelectedPanel key={tab.id}>{tabBody}</UnSelectedPanel>
       );
     };
 
     const renderEditorPanel =
-      selectedTabId === SideContentType.mobileEditor ? (
-        props.createWorkspaceInput()
+      selectedTabId === SideContentType.mobileEditor || selectedTabId === SideContentType.mobileEditorRun ? (
+        <EditorPanel key={'editor'}>
+          {props.createWorkspaceInput()}
+        </EditorPanel>
       ) : (
-        <div style={{ display: 'none' }}>{props.createWorkspaceInput()}</div>
+        <UnSelectedPanel key={'editor'}>{props.createWorkspaceInput()}</UnSelectedPanel>
       );
 
-    const renderReplPanel =
-      selectedTabId === SideContentType.mobileEditorRun ? (
-        <div style={{ marginLeft: '0.5rem', marginTop: '0.5rem', height: '100%' }}>
-          {props.createReplOutput()}
-        </div>
-      ) : (
-        <div style={{ display: 'none' }}>{props.createReplOutput()}</div>
-      );
+    // TODO: draggable here
+    const renderReplPanel = (
+      <DraggableRepl 
+        key={'repl'}
+        position={dragPosition} 
+        onDrag={onDrag} 
+        createReplOutput={props.createReplOutput}
+      />);
 
     return [
       renderEditorPanel,
       ...dynamicTabs.map(tab => renderPanel(tab, props.workspaceLocation)),
-      renderReplPanel
+      renderReplPanel 
     ];
-  }, [dynamicTabs, props, selectedTabId]);
+  }, [dynamicTabs, props, selectedTabId, dragPosition]);
 
   const renderedTabs = React.useMemo(() => {
     const renderTab = (tab: SideContentTab, workspaceLocation?: WorkspaceLocation) => {
@@ -184,6 +230,9 @@ const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => 
       // TODO: Added this next line specifically for evaluating program upon pressing the run tab on mobile
       if (newTabId === SideContentType.mobileEditorRun) {
         props.handleEditorEval();
+        handleShowRepl();
+      } else {
+        handleHideRepl();
       }
 
       handleActiveTabChange(newTabId);
@@ -210,14 +259,7 @@ const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => 
   return (
     <>
       {renderedPanels}
-      <div
-        style={{
-          height: '60px', // 80px
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
+      <TabsContainer>
         <Tabs
           id="mobile-side-content"
           onChange={changeTabsCallback}
@@ -238,7 +280,7 @@ const MobileSideContent: React.FC<MobileSideContentProps & OwnProps> = props => 
             className="side-content-tab"
           />
         </Tabs>
-      </div>
+      </TabsContainer>
     </>
   );
 };
