@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const DraggablePanel = styled.div`
   width: 100%;
-  min-height: 1000px; 
+  min-height: 1000px;
   z-index: 2;
   position: fixed;
   bottom: -930px;
@@ -38,28 +38,30 @@ const Circle = styled.div`
 `;
 
 type DragReplProps = {
-    position: { x: number, y: number };
-    onDrag: DraggableEventHandler;
-    createReplOutput: () => JSX.Element;
+  position: { x: number; y: number };
+  onDrag: DraggableEventHandler;
+  createReplOutput: () => JSX.Element;
 };
 
 const DraggableRepl: React.FC<DragReplProps> = props => {
-    return (
-        <Draggable
-            axis='y'
-            handle='#draghandle'
-            position={props.position}
-            bounds={{ top: -500, left: 0, right: 0, bottom: 0 }}
-            onDrag={props.onDrag}
-        >
-            <DraggablePanel>
-                <DragHandle id='draghandle'>
-                    {['1','2','3'].map((i) => (<Circle key={i}/>))}
-                </DragHandle>
-                <ReplContent>{props.createReplOutput()}</ReplContent>
-            </DraggablePanel>
-        </Draggable>
-    )
-}
+  return (
+    <Draggable
+      axis="y"
+      handle="#draghandle"
+      position={props.position}
+      bounds={{ top: -500, left: 0, right: 0, bottom: 0 }}
+      onDrag={props.onDrag}
+    >
+      <DraggablePanel>
+        <DragHandle id="draghandle">
+          {['1', '2', '3'].map(i => (
+            <Circle key={i} />
+          ))}
+        </DragHandle>
+        <ReplContent>{props.createReplOutput()}</ReplContent>
+      </DraggablePanel>
+    </Draggable>
+  );
+};
 
 export default DraggableRepl;
