@@ -41,7 +41,7 @@ const Circle = styled.div`
 type DragReplProps = {
   position: { x: number; y: number };
   onDrag: DraggableEventHandler;
-  createReplOutput: () => JSX.Element;
+  body: JSX.Element;
 };
 
 const DraggableRepl: React.FC<DragReplProps> = props => {
@@ -59,7 +59,7 @@ const DraggableRepl: React.FC<DragReplProps> = props => {
             <Circle key={i} />
           ))}
         </DragHandle>
-        <ReplContent>{props.createReplOutput()}</ReplContent>
+        <ReplContent>{props.body}</ReplContent>
       </DraggablePanel>
     </Draggable>
   );
