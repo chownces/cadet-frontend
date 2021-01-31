@@ -52,8 +52,6 @@
     "lz-string": "^1.4.4",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
-    "optionator": "^0.9.1",
-    "optionjs": "^1.1.2",
     "phaser": "^3.52.0",
     "query-string": "^6.13.8",
     "re-resizable": "^6.9.0",

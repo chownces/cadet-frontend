@@ -306,15 +306,6 @@
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-syntax-decorators" "^7.12.1"
 
-"@babel/plugin-proposal-decorators@7.12.1":
-  version "7.12.1"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.12.1.tgz#59271439fed4145456c41067450543aee332d15f"
-  integrity sha512-knNIuusychgYN8fGJHONL0RbFxLGawhXOJNLBk75TniTsZZeA+wdkDuv6wp4lGwzQEKjZi6/WYtnb3udNPmQmQ==
-  dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.12.1"
-    "@babel/helper-plugin-utils" "^7.10.4"
-    "@babel/plugin-syntax-decorators" "^7.12.1"
-
 "@babel/plugin-proposal-dynamic-import@^7.12.1":
   version "7.12.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-dynamic-import/-/plugin-proposal-dynamic-import-7.12.1.tgz#43eb5c2a3487ecd98c5c8ea8b5fdb69a2749b2dc"
@@ -4460,11 +4451,6 @@ css-loader@4.3.0:
     postcss-value-parser "^4.1.0"
     schema-utils "^2.7.1"
     semver "^7.3.2"
-
-css-mediaquery@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
-  integrity sha1-aiw3NEkoYYYxxUvTPO3TAdoYvqA=
 
 css-mediaquery@^0.1.2:
   version "0.1.2"
@@ -9439,11 +9425,6 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-optionjs@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/optionjs/-/optionjs-1.1.2.tgz#00d63161fda1fdd02612ab52a66c184e51148c4f"
-  integrity sha1-ANYxYf2h/dAmEqtSpmwYTlEUjE8=
-
 ordered-read-streams@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ordered-read-streams/-/ordered-read-streams-1.0.1.tgz#77c0cb37c41525d64166d990ffad7ec6a0e1363e"
@@ -11048,16 +11029,6 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
-
-react-responsive@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/react-responsive/-/react-responsive-8.2.0.tgz#e0ffb306cfd8f38c9c12e26725b9e1245fa9debc"
-  integrity sha512-iagCqVrw4QSjhxKp3I/YK6+ODkWY6G+YPElvdYKiUUbywwh9Ds0M7r26Fj2/7dWFFbOpcGnJE6uE7aMck8j5Qg==
-  dependencies:
-    hyphenate-style-name "^1.0.0"
-    matchmediaquery "^0.3.0"
-    prop-types "^15.6.1"
-    shallow-equal "^1.1.0"
 
 react-responsive@^8.2.0:
   version "8.2.0"
