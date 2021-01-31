@@ -22,6 +22,7 @@ const DragHandle = styled.div`
   width: 100%;
   background-color: #182026;
   box-shadow: inset 0 -1px 8px -3px rgba(200, 200, 200, 0.4);
+  cursor: pointer;
 `;
 
 const ReplContent = styled.div`
