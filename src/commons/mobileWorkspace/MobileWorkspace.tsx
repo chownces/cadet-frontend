@@ -249,7 +249,7 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
   };
 
   return (
-    <div className="workspace mobile-workspace">
+    <div className="workspace">
       {props.hasUnsavedChanges ? (
         <Prompt
           message={'You have changes that may not be saved. Are you sure you want to leave?'}
