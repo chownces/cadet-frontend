@@ -8,10 +8,10 @@ import { Prompt } from 'react-router';
 
 import Editor, { EditorProps } from '../editor/Editor';
 import McqChooser, { McqChooserProps } from '../mcqChooser/McqChooser';
-import { ReplProps } from '../repl/Repl';
+import Repl, { ReplProps } from '../repl/Repl';
 import { SideContentTab, SideContentType } from '../sideContent/SideContentTypes';
-import DraggableRepl from './DraggableRepl';
 import MobileKeyboard from './MobileKeyboard';
+import DraggableRepl from './mobileSideContent/DraggableRepl';
 import MobileSideContent, { MobileSideContentProps } from './mobileSideContent/MobileSideContent';
 
 export type MobileWorkspaceProps = StateProps;
@@ -227,11 +227,19 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
     () => ({
       label: 'Run',
       iconName: IconNames.PLAY,
-      body: <div></div>, // placeholder div since run tab does not have a specific panel body
+      body: (
+        <DraggableRepl
+          key={'repl'}
+          position={draggableReplPosition}
+          onDrag={onDrag}
+          body={<Repl {...props.replProps} />}
+          disabled={isDraggableReplDisabled}
+        />
+      ),
       id: SideContentType.mobileEditorRun,
       toSpawn: () => true
     }),
-    []
+    [props.replProps, draggableReplPosition, isDraggableReplDisabled]
   );
 
   const updatedMobileSideContentProps = () => {
@@ -255,14 +263,6 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
         canOutsideClickClose={false}
         isCloseButtonShown={false}
         title="Please turn back to portrait orientation!"
-      />
-
-      <DraggableRepl
-        key={'repl'}
-        position={draggableReplPosition}
-        onDrag={onDrag}
-        disabled={isDraggableReplDisabled}
-        replProps={props.replProps}
       />
 
       <MobileSideContent {...updatedMobileSideContentProps()} {...draggableReplProps} />

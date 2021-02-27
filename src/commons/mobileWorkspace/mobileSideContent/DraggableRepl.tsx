@@ -1,13 +1,11 @@
 import React from 'react';
 import Draggable, { DraggableEventHandler } from 'react-draggable';
 
-import Repl, { ReplProps } from '../repl/Repl';
-
 type DragReplProps = {
   position: { x: number; y: number };
   onDrag: DraggableEventHandler;
+  body: JSX.Element;
   disabled: boolean;
-  replProps: ReplProps;
 };
 
 const DraggableRepl: React.FC<DragReplProps> = props => {
@@ -34,9 +32,7 @@ const DraggableRepl: React.FC<DragReplProps> = props => {
             ))}
           </div>
         )}
-        <div className="REPL-content">
-          <Repl {...props.replProps} />
-        </div>
+        <div className="REPL-content">{props.body}</div>
       </div>
     </Draggable>
   );
