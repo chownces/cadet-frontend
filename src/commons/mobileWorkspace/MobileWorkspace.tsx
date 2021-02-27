@@ -35,6 +35,7 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
   const [isDraggableReplDisabled, setIsDraggableReplDisabled] = React.useState(false);
 
   const isPortrait = useMediaQuery({ orientation: 'portrait' });
+  const isMobile = /iPhone|iPad|Android/.test(navigator.userAgent);
 
   /**
    * Stores the mobile browser's portrait dimensions.
@@ -305,7 +306,7 @@ const MobileWorkspace: React.FC<MobileWorkspaceProps> = props => {
       ) : null}
 
       <Dialog
-        isOpen={!isPortrait}
+        isOpen={!isPortrait && isMobile}
         canEscapeKeyClose={false}
         canOutsideClickClose={false}
         isCloseButtonShown={false}

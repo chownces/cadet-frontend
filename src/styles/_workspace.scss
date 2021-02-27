@@ -32,6 +32,10 @@ $code-color-error: #ff4444;
     margin-right: 0.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.6rem;
+
+    .ControlBar_editingWorkspace {
+      width: 10%;
+    }
   }
 
   .workspace-parent {
@@ -770,6 +774,7 @@ $code-color-error: #ff4444;
     .repl-input-parent {
       padding: 0;
       margin-bottom: 0rem;
+      flex-wrap: nowrap;
     }
 
     .repl-react-ace {
@@ -1055,17 +1060,17 @@ $code-color-error: #ff4444;
 }
 
 .Popover-share {
-  .#{$ns}-popover-arrow-fill {
+  .#{$ns}-popover2-arrow-fill {
     fill: $cadet-color-4;
   }
 
-  .#{$ns}-popover-content {
+  .#{$ns}-popover2-content {
     background: $cadet-color-4;
     display: flex;
     padding: 0.4rem 0.8rem 0.4rem 0.8rem;
 
     input {
-      width: 25rem;
+      width: 15rem;
       margin-right: 0.58em;
       &:focus {
         outline: none;
