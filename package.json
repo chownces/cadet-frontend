@@ -124,7 +124,7 @@
     "coveralls": "^3.1.0",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
-    "eslint": "^7.25.0",
+    "eslint": "^7.18.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.8",
     "jest-canvas-mock": "^2.3.0",
