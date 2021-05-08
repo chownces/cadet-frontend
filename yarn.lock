@@ -1884,10 +1884,10 @@
     react-lifecycles-compat "^3.0.4"
     tslib "~1.13.0"
 
-"@blueprintjs/icons@^3.23.0", "@blueprintjs/icons@^3.24.0":
-  version "3.24.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/icons/-/icons-3.24.0.tgz#aa7e6042e40806d22f85da8d62990ff0296adcf2"
-  integrity sha512-OvDDI5EUueS1Y3t594iS8LAGoHhLhYjC2GuN/01a85n+ASLSp0jf0/+uix2JeCOj41iTdRRCINbWuRwVQNNGPw==
+"@blueprintjs/icons@^3.23.0", "@blueprintjs/icons@^3.24.0", "@blueprintjs/icons@^3.26.0":
+  version "3.26.0"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/icons/-/icons-3.26.0.tgz#d3f0aa0d35a9ebe8648db9651af364dfcc529d9f"
+  integrity sha512-1+yhYH1Fjj5qGx8drZUL2L1R42MiN0WVHTTKYqGEV9TAzhvFHCSZgALD7WNQa+FEibw/8B4U+79IRgUPJNEjow==
   dependencies:
     classnames "^2.2"
     tslib "~1.13.0"
@@ -2778,10 +2778,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/google.picker@^0.0.34":
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/@types/google.picker/-/google.picker-0.0.34.tgz#e1d4c22f200f4e22885854174fe48197c52c2f6a"
-  integrity sha512-boAuaICKHnPlkuRYCFhCKSLGTKqk3zs37YiK0u1T2EBfLhsuomFwAFbBxwl0E8yAGWR1V1FsJIlCDAExfC1NJA==
+"@types/google.picker@^0.0.36":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/google.picker/-/google.picker-0.0.36.tgz#56ef738bcc1ca476581439b185e8c7d4ca045914"
+  integrity sha512-z4w2Y37QQbfs5v+Q1bZY32NIhTQ/082gggbY6erusfGbiIpvT8fepHWpXHz/a9bHCIWzY+vnFAmq5Ro6eB14ag==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
@@ -2964,10 +2964,10 @@
     "@types/react-router" "*"
     redux ">= 3.7.2"
 
-"@types/react-router@*", "@types/react-router@^5.1.11":
-  version "5.1.11"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.11.tgz#b01ce4cb21bf7d6b32edc862fc1e2c0088044b5b"
-  integrity sha512-ofHbZMlp0Y2baOHgsWBQ4K3AttxY61bDMkwTiBOkPg7U6C/3UwwB5WaIx28JmSVi/eX3uFEMRo61BV22fDQIvg==
+"@types/react-router@*", "@types/react-router@^5.1.13":
+  version "5.1.13"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.13.tgz#051c0d229bd48ad90558a1db500708127cc512f7"
+  integrity sha512-ZIuaO9Yrln54X6elg8q2Ivp6iK6p4syPsefEYAhRDAoqNh48C8VYUmB9RkXjKSQAJSJV0mbIFCX7I4vZDcHrjg==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
