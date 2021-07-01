@@ -38,7 +38,7 @@
     "@sourceacademy/sharedb-ace": "^2.0.2",
     "@sourceacademy/sling-client": "^0.0.1",
     "@testing-library/user-event": "^13.1.9",
-    "@types/react-syntax-highlighter": "^13.5.0",
+    "@types/react-syntax-highlighter": "^13.5.1",
     "@types/uuid": "^8.3.0",
     "ace-builds": "^1.4.12",
     "acorn": "^8.3.0",
